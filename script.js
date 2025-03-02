@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             '<div class="log-entry">> Calculando melhor momento...</div>',
             '<div class="log-entry">> Enviando relatório para Renan...</div>',
             '<div class="log-entry success">> Processo finalizado com sucesso!</div>',
-            '<div class="log-entry">>Pegadinha hihihi mas agora já sei sua resposta...</div>',
+            '<div class="log-entry">>Pegadinha hihihi mas agora já sei tua resposta...</div>',
             '</div>'
         ];
     
