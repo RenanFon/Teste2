@@ -252,18 +252,19 @@ document.addEventListener('DOMContentLoaded', () => {
         notProgrammedBtn.addEventListener('mouseover', () => {
             notProgrammedBtn.style.transform = 'scale(1.1)';
             const bugPhrases = [
-                'Tem certeza? (；一_一)',
-                'Esse botão tá meio bugado... (・_・;)',
-                'O estagiário que fez esse! (╯°□°）╯︵ ┻━┻',
-                'Clica por sua conta e risco! (⊙﹏⊙∥)'
+                'ALERTA: FUNÇÃO INSTÁVEL',
+                'AVISO: MÓDULO NÃO TESTADO',
+                'ERRO: ACESSO NÃO PERMITIDO',
+                'FALHA: OPERAÇÃO INVÁLIDA'
             ];
             notProgrammedBtn.textContent = bugPhrases[Math.floor(Math.random() * bugPhrases.length)];
         });
 
         notProgrammedBtn.addEventListener('mouseout', () => {
             notProgrammedBtn.style.transform = 'scale(1)';
-            notProgrammedBtn.textContent = 'Ainda não programei essa opção 🤔';
+            notProgrammedBtn.textContent = 'OPÇÃO NÃO IMPLEMENTADA';
         });
+
     } else {
         console.error('Alguns elementos não foram encontrados!');
     }
