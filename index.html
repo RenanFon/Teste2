@@ -8,33 +8,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
-    <div id="particles-js" class="particles"></div>
     <div class="container">
         <div id="verification" class="verification">
-            <h1 class="title">Primeiro, preciso confirmar uma coisa...</h1>
-            <p class="message">Você é <span class="highlight-name">Danieli Zeferino</span> certo?</p>
+            <h1 class="title">Iniciando protocolo de verificação...</h1>
+            <p class="message">Meus sensores indicam que você pode ser <span class="highlight-name">Danieli Zeferino</span>. Posso confirmar essa informação?</p>
             <div class="buttons">
-                <button id="verifyYesBtn" class="btn yes-btn">Sim, sou eu! (＾▽＾)</button>
-                <button id="verifyNoBtn" class="btn no-btn">Não (；一_一)</button>
-                <button id="notProgrammedBtn" class="btn yes-btn">Ainda não programei essa opção (・_・;)</button>
+                <button id="verifyYesBtn" class="btn yes-btn">CONFIRMAR</button>
+                <button id="verifyNoBtn" class="btn no-btn">NEGAR</button>
+                <button id="notProgrammedBtn" class="btn yes-btn">OPÇÃO NÃO IMPLEMENTADA</button>
             </div>
         </div>
 
         <div id="birthdayCheck" class="hidden">
-            <h2 class="title">Mais uma coisinha...</h2>
-            <p class="message">Você nasceu<br>em 23 de junho?</p>
+            <h2 class="title">Verificação de segurança necessária...</h2>
+            <p class="message">De acordo com meu banco de dados<br>você nasceu em 23 de junho.<br>Essa informação procede?</p>
             <div class="buttons">
-                <button id="birthYesBtn" class="btn yes-btn">Sim! ( ´ ω ` )ノﾞ</button>
-                <button id="birthNoBtn" class="btn no-btn">Não ⊙﹏⊙∥</button>
+                <button id="birthYesBtn" class="btn yes-btn">CONFIRMAR</button>
+                <button id="birthNoBtn" class="btn no-btn">DADOS INCORRETOS</button>
             </div>
         </div>
 
         <div id="wrongDani" class="hidden">
-            <h2 class="title">Eita!</h2>
-            <p class="message">Então você é a Dani errada... Tchau!</p>
+            <h2 class="title">Erro 404: Dani não encontrada!</h2>
+            <p class="message">Desculpe, mas você não é a Dani que estou procurando.<br>Encerrando aplicação em 3... 2... 1...</p>
         </div>
 
         <div id="notProgrammed" class="hidden">
@@ -44,58 +42,60 @@
         </div>
 
         <div id="nameChange" class="hidden">
-            <h2 class="title">Ótimo!</h2>
+            <h2 class="title">Análise de compatibilidade concluída!</h2>
             <div class="message">
-                Então vamos trocar<br>
-                esse seu sobrenome
-                <br><br>
-                <span class="highlight-name">Zeferino</span>
-                <br>
-                por
-                <br>
-                <span class="highlight-name">Fonseca</span>
-                <br>
-                de uma vez?
+                De acordo com meus algoritmos avançados,<br>
+                o sobrenome <span class="highlight-name">Fonseca</span><br>
+                apresenta 99.9% de compatibilidade com você,<br>
+                superando significativamente<br>
+                o atual <span class="highlight-name">Zeferino</span>.<br><br>
+                Gostaria de aplicar essa atualização?
             </div>
-            <button id="continueBtn" class="btn yes-btn">Continuar (✿◠‿◠)</button>
+            <button id="continueBtn" class="btn yes-btn">PROSSEGUIR</button>
         </div>
 
         <div id="preparationQuestion" class="hidden">
-            <h2 class="title">Que lindo!</h2>
+            <h2 class="title">Atualização concluída com sucesso!</h2>
             <div class="message name-preview">
                 <span class="highlight-name">Danieli<br>Fonseca<br>Dos Santos</span>
                 <br>
-                <span class="subtle-text">Parece que combinou, né?</span>
+                <span class="subtle-text">Taxa de compatibilidade: ∞</span>
             </div>
             <div class="message">
-                Está preparada para<br>
-                a pergunta mais<br>
-                importante da sua vida?
+                Meus circuitos indicam que você está pronta<br>
+                para a pergunta mais importante já registrada<br>
+                em meu banco de dados. Devo prosseguir?
             </div>
             <div class="buttons">
-                <button id="readyBtn" class="btn yes-btn">Sim, estou! (＾▽＾)</button>
-                <button id="notReadyBtn" class="btn yes-btn">Não... pera, tô sim! (｀;ω;´)</button>
-                <button id="maybeBtn" class="btn yes-btn">Talvez... ah, vamos lá! (〃∀〃)</button>
+                <button id="readyBtn" class="btn yes-btn">INICIAR PROCESSO</button>
+                <button id="notReadyBtn" class="btn yes-btn">EXECUTAR MESMO ASSIM</button>
+                <button id="maybeBtn" class="btn yes-btn">CONFIRMAR E CONTINUAR</button>
             </div>
         </div>
 
         <div id="lastWarning" class="hidden">
-            <h2 class="title">Última chance!</h2>
-            <p class="message">Escolha sabiamente:</p>
+            <h2 class="title">⚠️ Aviso do Sistema ⚠️</h2>
+            <p class="message">Atenção: A próxima tela contém uma pergunta desenvolvida por Renan Fonseca que pode causar alterações permanentes em seu estado civil. Deseja continuar?</p>
             <div class="buttons">
-                <button id="continueAnyway" class="btn yes-btn">Quero ver a pergunta! (◕‿◕✿)</button>
-                <button id="imScared" class="btn yes-btn">Tô com medo (mas quero ver) (ノ_＜)</button>
-                <button id="noChoice" class="btn yes-btn">Não tenho escolha mesmo! ╮(︶▽︶)╭</button>
+                <button id="continueAnyway" class="btn yes-btn">PROSSEGUIR</button>
+                <button id="imScared" class="btn yes-btn">CONTINUAR</button>
+                <button id="noChoice" class="btn yes-btn">ACEITAR E AVANÇAR</button>
             </div>
         </div>
 
         <div id="mainQuestion" class="hidden">
             <div class="heart"></div>
-            <h1 class="title">Tenho uma pergunta para você...</h1>
-            <p class="message"><span class="highlight-name">Dani</span>, você quer namorar comigo?</p>
+            <h1 class="title">Executando renan.fonseca.pedido_namoro.v1.0.exe</h1>
+            <p class="message">
+                <span class="highlight-name">Dani</span>,<br>
+                Deseja atualizar seu status para:<br><br>
+                relationship_status = "namorando";<br>
+                partner = "Renan Fonseca";<br>
+                lifetime_commitment = true;
+            </p>
             <div class="buttons">
-                <button id="yesBtn" class="btn yes-btn">Sim, quero! (｡♥‿♥｡)</button>
-                <button id="anotherYesBtn" class="btn yes-btn">Sim, aceito! (´｡• ᵕ •｡`)</button>
+                <button id="yesBtn" class="btn yes-btn">EXECUTAR ATUALIZAÇÃO</button>
+                <button id="anotherYesBtn" class="btn yes-btn">CONFIRMAR ALTERAÇÕES</button>
             </div>
             <div id="celebration" class="celebration hidden">
                 <h2></h2>
@@ -106,7 +106,7 @@
         </div>
 
         <div id="wrongPerson" class="hidden">
-            <h2>Então o que está fazendo aqui? Cai fora!</h2>
+            <h2>Acesso negado! Usuário não autorizado!</h2>
         </div>
     </div>
     <footer class="footer">

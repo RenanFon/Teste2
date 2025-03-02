@@ -1,39 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Configuração das partículas
-    particlesJS('particles-js', {
-        particles: {
-            number: { value: 80, density: { enable: true, value_area: 800 } },
-            color: { value: '#ff6b8b' },
-            shape: { type: 'circle' },
-            opacity: { value: 0.5, random: true },
-            size: { value: 3, random: true },
-            line_linked: {
-                enable: true,
-                distance: 150,
-                color: '#ff6b8b',
-                opacity: 0.4,
-                width: 1
-            },
-            move: {
-                enable: true,
-                speed: 2,
-                direction: 'none',
-                random: true,
-                out_mode: 'out'
-            }
-        },
-        interactivity: {
-            detect_on: 'canvas',
-            events: {
-                onhover: { enable: true, mode: 'repulse' },
-                onclick: { enable: true, mode: 'push' },
-                resize: true
-            }
-        },
-        retina_detect: true
-    });
-
-    // Elementos principais
+    // Manter apenas os elementos principais
     const verification = document.getElementById('verification');
     const nameChange = document.getElementById('nameChange');
     const mainQuestion = document.getElementById('mainQuestion');
@@ -67,27 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (continueBtn) {
         continueBtn.addEventListener('click', () => {
-            const container = document.querySelector('.container');
-            container.style.animation = 'spinAndScale 1s ease';
-            addFloatingEmojis();
-            
-            // Adicionar efeito especial para o novo nome
-            setTimeout(() => {
-                container.style.animation = 'containerFloat 3s ease-in-out infinite';
-                nameChange.classList.add('hidden');
-                preparationQuestion.classList.remove('hidden');
-                animateDialogs(preparationQuestion, [], 50, 800);
-                
-                // Fazer o novo nome aparecer com destaque
-                const namePreview = document.querySelector('.name-preview');
-                namePreview.style.transform = 'scale(0)';
-                namePreview.style.opacity = '0';
-                setTimeout(() => {
-                    namePreview.style.transition = 'all 0.8s ease';
-                    namePreview.style.transform = 'scale(1)';
-                    namePreview.style.opacity = '1';
-                }, 100);
-            }, 1000);
+            nameChange.classList.add('hidden');
+            preparationQuestion.classList.remove('hidden');
+            animateDialogs(preparationQuestion, [], 50, 800);
         });
     }
 
@@ -105,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (birthYesBtn) {
         birthYesBtn.addEventListener('click', () => {
             const currentDialog = birthdayCheck.querySelector('.message');
-            currentDialog.innerHTML = 'Há então é você mesmo quem estou procurando!';
+            currentDialog.innerHTML = 'Autenticação bem-sucedida!<br>Identificação positiva confirmada.<br>Iniciando protocolo especial...';
             
             setTimeout(() => {
                 showSection(birthdayCheck, nameChange);
@@ -142,113 +90,76 @@ document.addEventListener('DOMContentLoaded', () => {
     function celebrateYes() {
         document.querySelector('.buttons').style.display = 'none';
         
-        // Criar efeito de confete
-        for (let i = 0; i < 50; i++) {
-            createConfetti();
-        }
-
-        // Adicionar efeito de suspense antes de revelar a pegadinha
-        setTimeout(() => {
-            const heart = document.querySelector('.heart');
-            if (heart) {
-                heart.style.transform = 'rotate(45deg) scale(2)';
-                heart.style.opacity = '0';
+        const title = celebration.querySelector('h2');
+        const message = celebration.querySelector('.message');
+        
+        celebration.classList.remove('hidden');
+        
+        const systemLogs = [
+            '<div class="console-log">',
+            '<div class="log-entry">> Iniciando processo de validação...</div>',
+            '<div class="log-entry">> Verificando compatibilidade...</div>',
+            '<div class="log-entry">> Compatibilidade: 100%</div>',
+            '<div class="log-entry">> Atualizando banco de dados...</div>',
+            '<div class="log-entry">> Salvando alterações...</div>',
+            '<div class="log-entry">> Processando pedido de namoro...</div>',
+            '<div class="log-entry error">> ERRO CRÍTICO DETECTADO!</div>',
+            '<div class="log-entry error">> Código de erro: NAM0R0-404</div>',
+            '<div class="log-entry error">> Motivo: Pedido virtual não autorizado</div>',
+            '<div class="log-entry">> Iniciando protocolo de contingência...</div>',
+            '</div>',
+            'ATENÇÃO: Pedido virtual rejeitado pelo sistema!',
+            'Motivo: Renan Fonseca deve fazer o pedido pessoalmente.',
+            '<div class="console-log">',
+            '<div class="log-entry">> Preparando ambiente real...</div>',
+            '<div class="log-entry">> Calculando melhor momento...</div>',
+            '<div class="log-entry">> Enviando relatório para Renan...</div>',
+            '<div class="log-entry success">> Processo finalizado com sucesso!</div>',
+            '<div class="log-entry">> Em breve: commit -m "Início do namoro" ❤</div>',
+            '</div>'
+        ];
+    
+        let currentLine = 0;
+        function typeLine() {
+            if (currentLine < systemLogs.length) {
+                const p = document.createElement('div');
+                message.appendChild(p);
+                
+                if (systemLogs[currentLine].includes('class="log-entry"')) {
+                    p.outerHTML = systemLogs[currentLine];
+                    const lastLog = message.querySelector('.log-entry:last-child');
+                    setTimeout(() => lastLog.classList.add('show'), 100);
+                    currentLine++;
+                    setTimeout(typeLine, 800);
+                } else if (systemLogs[currentLine].includes('class="console-log"')) {
+                    p.outerHTML = systemLogs[currentLine];
+                    currentLine++;
+                    setTimeout(typeLine, 500);
+                } else {
+                    typeWriter(p, systemLogs[currentLine], 50);
+                    currentLine++;
+                    setTimeout(typeLine, 2000);
+                }
+                
+                // Scroll automático
+                const scrollToBottom = () => {
+                    const containerHeight = document.querySelector('.container').scrollHeight;
+                    window.scrollTo({
+                        top: containerHeight,
+                        behavior: 'smooth'
+                    });
+                };
+                
+                if (currentLine > 2) {
+                    setTimeout(scrollToBottom, 200);
+                }
             }
-
-            setTimeout(() => {
-                // Scroll suave para o topo em dispositivos móveis
-                if (window.innerWidth <= 480) {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-
-                celebration.classList.remove('hidden');
-                
-                // Nova implementação para animação do texto
-                const title = celebration.querySelector('h2');
-                const message = celebration.querySelector('.message');
-                let delay = 0;
-                
-                // Animar título
-                title.textContent = '';
-                typeWriter(title, 'Era pegadinha!', 50);
-                delay += 1500;
-
-                // Animar mensagem linha por linha
-                setTimeout(() => {
-                    message.innerHTML = '';
-                    const lines = [
-                        'O pedido de verdade vai ser pessoalmente!',
-                        'Mas já sei qual vai ser sua resposta',
-                        '<div class="console-log">',
-                        '<div class="log-entry">> Iniciando processo...</div>',
-                        '<div class="log-entry">> Salvando dados...</div>',
-                        '<div class="log-entry">> Enviando para Renan Fonseca...</div>',
-                        '<div class="log-entry">> Confirmando...</div>',
-                        '<div class="log-entry success">> Sucesso!</div>',
-                        '<div class="log-entry">> Até breve! ❤</div>',
-                        '</div>'
-                    ];
-
-                    let currentLine = 0;
-                    function typeLine() {
-                        if (currentLine < lines.length) {
-                            const p = document.createElement('div');
-                            message.appendChild(p);
-                            
-                            if (lines[currentLine].includes('class="log-entry"')) {
-                                p.outerHTML = lines[currentLine];
-                                const lastLog = message.querySelector('.log-entry:last-child');
-                                setTimeout(() => lastLog.classList.add('show'), 100);
-                                currentLine++;
-                                setTimeout(typeLine, 1000); // Delay maior para os logs
-                            } else {
-                                if (lines[currentLine].includes('<div class="console-log">')) {
-                                    p.outerHTML = lines[currentLine];
-                                } else {
-                                    if (lines[currentLine].includes('<span')) {
-                                        p.innerHTML = lines[currentLine];
-                                        const span = p.querySelector('span');
-                                        span.textContent = '';
-                                        typeWriter(span, span.getAttribute('data-text') || span.textContent, 50);
-                                    } else {
-                                        typeWriter(p, lines[currentLine], 50);
-                                    }
-                                }
-                                currentLine++;
-                                setTimeout(typeLine, 1500);
-                            }
-                            
-                            // Garantir que o scroll acompanhe o conteúdo
-                            const scrollToBottom = () => {
-                                const containerHeight = document.querySelector('.container').scrollHeight;
-                                window.scrollTo({
-                                    top: containerHeight,
-                                    behavior: 'smooth'
-                                });
-                            };
-                            
-                            if (currentLine > 2) { // Começar a rolar após os primeiros textos
-                                setTimeout(scrollToBottom, 200);
-                            }
-                        }
-                    }
-                    
-                    typeLine();
-                }, delay);
-
-                // Garantir que o usuário veja todo o conteúdo em mobile
-                if (window.innerWidth <= 480) {
-                    const scrollToBottom = () => {
-                        window.scrollTo({ 
-                            top: document.body.scrollHeight,
-                            behavior: 'smooth'
-                        });
-                    };
-                    setTimeout(scrollToBottom, 1500);
-                }
-
-            }, 1000);
-        }, 2000);
+        }
+    
+        setTimeout(() => {
+            message.innerHTML = '';
+            typeLine();
+        }, 1000);
     }
 
     if (yesBtn) {
@@ -281,23 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     [readyBtn, notReadyBtn, maybeBtn].forEach(btn => {
         if (btn) {
-            btn.addEventListener('mouseover', () => {
-                const phrases = [
-                    'Boa escolha! (◕‿◕✿)',
-                    'Sabia decisão! (｡♥‿♥｡)',
-                    'Essa é a resposta certa! (＾▽＾)',
-                    'Continue assim! (´｡• ᵕ •｡`)'
-                ];
-                btn.textContent = phrases[Math.floor(Math.random() * phrases.length)];
-            });
-
-            btn.addEventListener('mouseout', (e) => {
-                btn.textContent = btn.getAttribute('original-text') || e.target.originalText;
-            });
-
             btn.addEventListener('click', () => {
-                document.body.style.animation = 'rainbow 2s';
-                addFloatingEmojis();
                 preparationQuestion.classList.add('hidden');
                 lastWarning.classList.remove('hidden');
                 animateDialogs(lastWarning, [], 50, 800);
@@ -312,33 +207,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     [continueAnyway, imScared, noChoice].forEach(btn => {
         if (btn) {
-            btn.addEventListener('mouseover', () => {
-                const lastPhrases = [
-                    'Não tem volta! (｀･ω･´)ゞ',
-                    'Decisão final! (◕‿◕✿)',
-                    'Preparada? (｡♥‿♥｡)',
-                    'Última chance... ou não! ╮(︶▽︶)╭'
-                ];
-                btn.textContent = lastPhrases[Math.floor(Math.random() * lastPhrases.length)];
-            });
-
-            btn.addEventListener('mouseout', (e) => {
-                btn.textContent = btn.getAttribute('original-text') || e.target.originalText;
-            });
-
             btn.addEventListener('click', () => {
-                const heart = document.querySelector('.heart');
-                heart.style.transform = 'rotate(45deg) scale(2)';
-                heart.style.opacity = '0';
-                addFloatingEmojis();
-                
-                setTimeout(() => {
-                    heart.style.transform = 'rotate(45deg) scale(1)';
-                    heart.style.opacity = '1';
-                    lastWarning.classList.add('hidden');
-                    mainQuestion.classList.remove('hidden');
-                    animateDialogs(mainQuestion, [], 50, 1000);
-                }, 1000);
+                lastWarning.classList.add('hidden');
+                mainQuestion.classList.remove('hidden');
+                animateDialogs(mainQuestion, [], 50, 1000);
             });
         }
     });
@@ -374,7 +246,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Botão voltar clicado'); // Debug
             notProgrammed.classList.add('hidden');
             verification.classList.remove('hidden');
-            addFloatingEmojis();
         });
 
         // Efeito de hover mais óbvio
@@ -406,23 +277,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // Ajustar função showSection para melhor comportamento mobile
 function showSection(hideElement, showElement) {
     if (hideElement) {
-        hideElement.style.opacity = '0';
-        hideElement.style.transform = 'scale(0.9) translateY(20px)';
-        setTimeout(() => hideElement.classList.add('hidden'), 500);
+        hideElement.classList.add('hidden');
     }
     
     if (showElement) {
         showElement.classList.remove('hidden');
-        showElement.style.opacity = '0';
-        
-        requestAnimationFrame(() => {
-            showElement.style.opacity = '1';
-            showElement.style.transform = 'scale(1) translateY(0)';
-            
-            // Reset do scroll
-            window.scrollTo(0, 0);
-            document.querySelector('.container').scrollTop = 0;
-        });
+        // Reset do scroll
+        window.scrollTo(0, 0);
     }
 }
 
@@ -463,49 +324,6 @@ function createConfetti() {
     });
 
     animation.onfinish = () => confetti.remove();
-}
-
-function getRandomColor() {
-    const colors = ['#ff6b6b', '#4CAF50', '#FFD700', '#FF69B4', '#87CEEB'];
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
-function addFloatingEmojis() {
-    const emojis = ['💝', '💖', '💕', '💗', '💓', '💞'];
-    for (let i = 0; i < 10; i++) {
-        const emoji = document.createElement('div');
-        emoji.className = 'floating-emoji';
-        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        emoji.style.left = Math.random() * window.innerWidth + 'px';
-        emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        emoji.style.opacity = Math.random() * 0.5 + 0.5;
-        emoji.style.filter = 'blur(0.5px)';
-        emoji.style.textShadow = '0 0 10px rgba(255,255,255,0.5)';
-        document.body.appendChild(emoji);
-        
-        setTimeout(() => emoji.remove(), 5000);
-    }
-}
-
-function dancingTitle(element, duration = 2000) {
-    const originalTransform = element.style.transform;
-    const dances = [
-        'translateY(-10px) rotate(3deg)',
-        'translateY(5px) rotate(-2deg)',
-        'translateY(-7px) rotate(1deg)',
-        'translateY(3px) rotate(-3deg)'
-    ];
-    
-    let i = 0;
-    const interval = setInterval(() => {
-        element.style.transform = dances[i % dances.length];
-        i++;
-    }, 200);
-    
-    setTimeout(() => {
-        clearInterval(interval);
-        element.style.transform = originalTransform;
-    }, duration);
 }
 
 function typeWriter(element, text, speed = 50) {
