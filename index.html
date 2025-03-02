@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💝 Uma pergunta especial 💝</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <div id="particles-js" class="particles"></div>
+    <div class="container">
+        <div id="verification" class="verification">
+            <h1 class="title">Primeiro, preciso confirmar uma coisa...</h1>
+            <p class="message">Você é <span class="highlight-name">Danieli Zeferino</span> certo?</p>
+            <div class="buttons">
+                <button id="verifyYesBtn" class="btn yes-btn">Sim, sou eu! 💝</button>
+                <button id="verifyNoBtn" class="btn no-btn">Não</button>
+                <button id="notProgrammedBtn" class="btn yes-btn">Ainda não programei essa opção 🤔</button>
+            </div>
+        </div>
+
+        <div id="notProgrammed" class="hidden">
+            <h2 class="title">Ué... 🤪</h2>
+            <p class="message">Ainda não programei aqui pô, volta lá e escolhe outra opção! 😅</p>
+            <button id="backBtn" class="btn yes-btn">Beleza, vou voltar! 🔄</button>
+        </div>
+
+        <div id="nameChange" class="hidden">
+            <h2 class="title">Ótimo! 😊</h2>
+            <div class="message">
+                Então vamos trocar esse seu sobrenome
+                <br>
+                <span class="highlight-name">Zeferino</span>
+                <br>
+                por
+                <br>
+                <span class="highlight-name">Fonseca</span>
+                <br>
+                de uma vez?
+            </div>
+            <button id="continueBtn" class="btn yes-btn">Continuar 💖</button>
+        </div>
+
+        <div id="preparationQuestion" class="hidden">
+            <h2 class="title">Que lindo! 😍</h2>
+            <div class="message name-preview">
+                <span class="highlight-name">Danieli Fonseca Dos Santos</span>
+                <br>
+                <span class="subtle-text">Parece que combinou, né? 💝</span>
+            </div>
+            <div class="message">
+                Está preparada para a pergunta mais importante da sua vida?
+            </div>
+            <div class="buttons">
+                <button id="readyBtn" class="btn yes-btn">Sim, estou! 😊</button>
+                <button id="notReadyBtn" class="btn yes-btn">Não... pera, tô sim! 😅</button>
+                <button id="maybeBtn" class="btn yes-btn">Talvez... ah, vamos lá! 🙈</button>
+            </div>
+        </div>
+
+        <div id="lastWarning" class="hidden">
+            <h2 class="title">Última chance!</h2>
+            <p class="message">Escolha sabiamente:</p>
+            <div class="buttons">
+                <button id="continueAnyway" class="btn yes-btn">Quero ver a pergunta! 🤗</button>
+                <button id="imScared" class="btn yes-btn">Tô com medo (mas quero ver) 😱</button>
+                <button id="noChoice" class="btn yes-btn">Não tenho escolha mesmo! 😂</button>
+            </div>
+        </div>
+
+        <div id="mainQuestion" class="hidden">
+            <div class="heart"></div>
+            <h1 class="title">Tenho uma pergunta para você...</h1>
+            <p class="message"><span class="highlight-name">Dani</span>, você quer namorar comigo?</p>
+            <div class="buttons">
+                <button id="yesBtn" class="btn yes-btn">Sim, quero! 💑</button>
+                <button id="anotherYesBtn" class="btn yes-btn">Sim, aceito! 💘</button>
+            </div>
+            <div id="celebration" class="celebration hidden">
+                <h2></h2>
+                <div class="message">
+                    <!-- O conteúdo será inserido via JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <div id="wrongPerson" class="hidden">
+            <h2>Então o que está fazendo aqui? Cai fora! 😠</h2>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
