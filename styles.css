@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 body {
     margin: 0;
@@ -102,7 +102,7 @@ body::before {
 .title {
     color: #fff;
     margin-bottom: 15px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Consolas', monospace;
     font-size: clamp(1.3em, 4vw, 2em);
     text-shadow: 0 0 10px rgba(255, 107, 139, 0.5),
                  0 0 20px rgba(255, 107, 139, 0.3);
@@ -112,6 +112,7 @@ body::before {
     animation: none;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .message {
@@ -131,8 +132,9 @@ body::before {
     text-shadow: 0 0 10px rgba(255, 107, 139, 0.5),
                  0 0 20px rgba(255, 107, 139, 0.3);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Consolas', monospace;
     font-weight: 400;
+    letter-spacing: 0.5px;
 }
 
 .message p {
@@ -277,30 +279,37 @@ body::before {
 }
 
 .highlight-name {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.2em;
+    font-family: 'Consolas', monospace;
+    font-size: 1.1em;
     color: #ff4181;
     text-shadow: 0 0 10px rgba(255, 65, 129, 0.3);
     font-weight: bold;
-    background: linear-gradient(45deg, #ff6b8b, #ff4181);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientFlow 3s ease infinite;
-    padding: 0 5px;
+    padding: 2px 6px;
+    letter-spacing: 0.5px;
+    background: rgba(255, 65, 129, 0.1);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 65, 129, 0.3);
+    display: inline-block;
+    margin: 2px 0;
+    color: #ffffff;
 }
 
 .name-preview {
     margin-top: 30px;
-    background: linear-gradient(45deg, #ff6b8b40, #ff418140);
+    background: rgba(255, 65, 129, 0.05);
+    border: 1px solid rgba(255, 65, 129, 0.2);
+    padding: 15px;
+    border-radius: 8px;
     animation: glowBorder 2s infinite;
 }
 
 .subtle-text {
     font-size: 0.7em;
-    opacity: 0.9;
-    font-style: italic;
-    font-family: 'Poppins', sans-serif;
+    opacity: 0.7;
+    font-style: normal;
+    font-family: 'Consolas', monospace;
     font-weight: 300;
+    letter-spacing: 0.5px;
 }
 
 .typing-cursor::after {
@@ -563,6 +572,8 @@ body::before {
     justify-content: center;
     align-items: center;
     gap: 5px;
+    font-family: 'Consolas', monospace;
+    letter-spacing: 0.5px;
 }
 
 .footer .emoji,
@@ -591,11 +602,12 @@ body::before {
     backdrop-filter: blur(5px);
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.7em;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Consolas', monospace;
     z-index: 1000;
     border-top: 1px solid rgba(255, 107, 139, 0.2);
     text-shadow: 0 0 10px rgba(255, 107, 139, 0.3);
     animation: fadeInUp 0.5s ease-out;
+    letter-spacing: 0.5px;
 }
 
 .footer .emoji {
