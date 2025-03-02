@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
 body {
     margin: 0;
     min-height: calc(100vh - 40px);
@@ -7,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     background: linear-gradient(45deg, #000000, #1a0012);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Consolas', monospace;
     overflow: hidden;
     position: relative;
     padding: 20px;
@@ -265,7 +263,7 @@ body::before {
 }
 
 #wrongPerson h2 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Consolas', monospace;
     color: #ff4f7b;
     animation: shake 0.5s ease-in-out;
 }
@@ -398,12 +396,12 @@ body::before {
 }
 
 #celebration h2 {
+    font-family: 'Consolas', monospace;
     font-size: 1.5em;
-    background: linear-gradient(45deg, #ff6b8b, #ff4181, #ff6b8b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% auto;
-    animation: textGradient 2s linear infinite, bounceIn 1s ease;
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    color: #ff4181;
     padding: 10px;
     margin-top: 30px;
     font-family: 'Poppins', sans-serif;
