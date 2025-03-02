@@ -737,3 +737,32 @@ body::before {
         transform: translateY(0);
     }
 }
+
+.process-log {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 107, 139, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.process-log .log-entry {
+    color: #a8a8a8;
+    font-family: 'Consolas', monospace;
+    font-size: 0.9em;
+    margin: 5px 0;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.process-log .log-entry.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}

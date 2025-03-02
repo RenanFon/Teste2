@@ -26,16 +26,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Verificação inicial
     if (verifyYesBtn) {
         verifyYesBtn.addEventListener('click', () => {
-            showSection(verification, birthdayCheck);
-            animateDialogs(birthdayCheck, [], 50, 800);
+            const logs = [
+                'Iniciando verificação de identidade...',
+                'Acessando banco de dados...',
+                'Validando informações...',
+                'Autenticação inicial bem-sucedida'
+            ];
+            showProcessLogs(verification, logs, () => {
+                showSection(verification, birthdayCheck);
+                animateDialogs(birthdayCheck, [], 50, 800);
+            });
         });
     }
 
     if (continueBtn) {
         continueBtn.addEventListener('click', () => {
-            nameChange.classList.add('hidden');
-            preparationQuestion.classList.remove('hidden');
-            animateDialogs(preparationQuestion, [], 50, 800);
+            const logs = [
+                'Iniciando processo de atualização...',
+                'Verificando compatibilidade de sobrenomes...',
+                'Calculando taxas de sincronização...',
+                'Preparando alterações no registro...',
+                'Atualização autorizada: PROCESSANDO'
+            ];
+            showProcessLogs(nameChange, logs, () => {
+                nameChange.classList.add('hidden');
+                preparationQuestion.classList.remove('hidden');
+                animateDialogs(preparationQuestion, [], 50, 800);
+            });
         });
     }
 
@@ -52,13 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Evento para confirmação de data correta
     if (birthYesBtn) {
         birthYesBtn.addEventListener('click', () => {
-            const currentDialog = birthdayCheck.querySelector('.message');
-            currentDialog.innerHTML = 'Autenticação bem-sucedida!<br>Identificação positiva confirmada.<br>Iniciando protocolo especial...';
-            
-            setTimeout(() => {
-                showSection(birthdayCheck, nameChange);
-                animateDialogs(nameChange, [], 50, 800);
-            }, 2000);
+            const logs = [
+                'Verificando data de nascimento...',
+                'Comparando registros...',
+                'Confirmando identidade...',
+                'Autenticação completa: USUÁRIO VÁLIDO'
+            ];
+            showProcessLogs(birthdayCheck, logs, () => {
+                const currentDialog = birthdayCheck.querySelector('.message');
+                currentDialog.innerHTML = 'Autenticação bem-sucedida!<br>Identificação positiva confirmada.<br>Iniciando protocolo especial...';
+                
+                setTimeout(() => {
+                    showSection(birthdayCheck, nameChange);
+                    animateDialogs(nameChange, [], 50, 800);
+                }, 2000);
+            });
         });
     }
 
@@ -193,9 +218,18 @@ document.addEventListener('DOMContentLoaded', () => {
     [readyBtn, notReadyBtn, maybeBtn].forEach(btn => {
         if (btn) {
             btn.addEventListener('click', () => {
-                preparationQuestion.classList.add('hidden');
-                lastWarning.classList.remove('hidden');
-                animateDialogs(lastWarning, [], 50, 800);
+                const logs = [
+                    'Verificando estado do sistema...',
+                    'Carregando módulos necessários...',
+                    'Preparando ambiente de execução...',
+                    'Iniciando protocolo principal...',
+                    'Sistema preparado: PROSSEGUINDO'
+                ];
+                showProcessLogs(preparationQuestion, logs, () => {
+                    preparationQuestion.classList.add('hidden');
+                    lastWarning.classList.remove('hidden');
+                    animateDialogs(lastWarning, [], 50, 800);
+                });
             });
         }
     });
@@ -208,9 +242,18 @@ document.addEventListener('DOMContentLoaded', () => {
     [continueAnyway, imScared, noChoice].forEach(btn => {
         if (btn) {
             btn.addEventListener('click', () => {
-                lastWarning.classList.add('hidden');
-                mainQuestion.classList.remove('hidden');
-                animateDialogs(mainQuestion, [], 50, 1000);
+                const logs = [
+                    'Carregando módulo principal...',
+                    'Verificando dependências...',
+                    'Iniciando processo crítico...',
+                    'Preparando execução final...',
+                    'Sistema pronto: EXECUTANDO'
+                ];
+                showProcessLogs(lastWarning, logs, () => {
+                    lastWarning.classList.add('hidden');
+                    mainQuestion.classList.remove('hidden');
+                    animateDialogs(mainQuestion, [], 50, 1000);
+                });
             });
         }
     });
@@ -412,4 +455,32 @@ function animateDialogs(container, messages, speed = 50, delayBetween = 1000) {
             animateElement();
         }, index * delayBetween);
     });
+}
+
+function showProcessLogs(section, logs, callback) {
+    const logContainer = document.createElement('div');
+    logContainer.className = 'console-log process-log';
+    section.appendChild(logContainer);
+
+    let currentLog = 0;
+    function displayLog() {
+        if (currentLog < logs.length) {
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.textContent = '> ' + logs[currentLog];
+            logContainer.appendChild(logEntry);
+            
+            setTimeout(() => {
+                logEntry.classList.add('show');
+                currentLog++;
+                setTimeout(displayLog, 500);
+            }, 100);
+        } else {
+            setTimeout(() => {
+                logContainer.remove();
+                if (callback) callback();
+            }, 1000);
+        }
+    }
+    displayLog();
 }
