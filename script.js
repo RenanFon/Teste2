@@ -42,6 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastWarning = document.getElementById('lastWarning');
     const notProgrammed = document.getElementById('notProgrammed');
 
+    // Elementos de verificação de data
+    const birthdayCheck = document.getElementById('birthdayCheck');
+    const wrongDani = document.getElementById('wrongDani');
+    const birthYesBtn = document.getElementById('birthYesBtn');
+    const birthNoBtn = document.getElementById('birthNoBtn');
+
     // Botões
     const verifyYesBtn = document.getElementById('verifyYesBtn');
     const verifyNoBtn = document.getElementById('verifyNoBtn');
@@ -54,9 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Verificação inicial
     if (verifyYesBtn) {
         verifyYesBtn.addEventListener('click', () => {
-            showSection(verification, nameChange);
-            addFloatingEmojis();
-            animateDialogs(nameChange, [], 50, 800);
+            showSection(verification, birthdayCheck);
+            animateDialogs(birthdayCheck, [], 50, 800);
         });
     }
 
@@ -90,6 +95,29 @@ document.addEventListener('DOMContentLoaded', () => {
         verifyNoBtn.addEventListener('click', () => {
             verification.classList.add('hidden');
             wrongPerson.classList.remove('hidden');
+            setTimeout(() => {
+                window.close();
+            }, 3000);
+        });
+    }
+
+    // Evento para confirmação de data correta
+    if (birthYesBtn) {
+        birthYesBtn.addEventListener('click', () => {
+            const currentDialog = birthdayCheck.querySelector('.message');
+            currentDialog.innerHTML = 'Há então é você mesmo quem estou procurando! (◍•ᴗ•◍)❤';
+            
+            setTimeout(() => {
+                showSection(birthdayCheck, nameChange);
+                animateDialogs(nameChange, [], 50, 800);
+            }, 2000);
+        });
+    }
+
+    // Evento para data incorreta
+    if (birthNoBtn) {
+        birthNoBtn.addEventListener('click', () => {
+            showSection(birthdayCheck, wrongDani);
             setTimeout(() => {
                 window.close();
             }, 3000);
@@ -137,17 +165,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Animar título
                 title.textContent = '';
-                typeWriter(title, '❤️ Era pegadinha! 🤪', 50);
+                typeWriter(title, '(｡♥‿♥｡) Era pegadinha! (＾▽＾)', 50);
                 delay += 1500;
 
                 // Animar mensagem linha por linha
                 setTimeout(() => {
                     message.innerHTML = '';
                     const lines = [
-                        'O pedido de verdade vai ser pessoalmente!',
-                        'Mas já sei qual vai ser sua resposta 😏',
-                        '<span class="highlight-name">Obrigado por testar a aplicação!</span>',
-                        '<span class="subtle-text">Te vejo em breve! 💝</span>'
+                        'O pedido de verdade vai ser pessoalmente! (◕‿◕✿)',
+                        'Mas já sei qual vai ser sua resposta (｡♥‿♥｡)',
+                        '<span class="highlight-name">Obrigado por testar a aplicação! (＾▽＾)</span>',
+                        '<span class="subtle-text">Te vejo em breve! (´｡• ᵕ •｡`)</span>'
                     ];
 
                     let currentLine = 0;
@@ -169,11 +197,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             setTimeout(typeLine, 1500);
                         } else {
                             // Adicionar emojis após completar o texto
-                            const funEmojis = ['😜', '🤪', '😏', '😎', '😊'];
+                            const funKaomojis = ['(◕‿◕✿)', '(｡♥‿♥｡)', '(＾▽＾)', '(´｡• ᵕ •｡`)', '(◍•ᴗ•◍)'];
                             for (let i = 0; i < 10; i++) {
                                 const emoji = document.createElement('div');
                                 emoji.className = 'floating-emoji';
-                                emoji.textContent = funEmojis[Math.floor(Math.random() * funEmojis.length)];
+                                emoji.textContent = funKaomojis[Math.floor(Math.random() * funKaomojis.length)];
                                 emoji.style.left = Math.random() * window.innerWidth + 'px';
                                 document.body.appendChild(emoji);
                                 setTimeout(() => emoji.remove(), 5000);
@@ -198,10 +226,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Adicionar efeito de hover divertido
         anotherYesBtn.addEventListener('mouseover', () => {
             const phrases = [
-                'Clica em mim! 😊',
-                'Eu sei que você quer! 😍',
-                'A outra opção é igual! 😅',
-                'Escolha sabiamente... ou não! 😂'
+                'Clica em mim! (◕‿◕✿)',
+                'Eu sei que você quer! (｡♥‿♥｡)',
+                'A outra opção é igual! (＾▽＾)',
+                'Escolha sabiamente... ou não! ╮(︶▽︶)╭'
             ];
             anotherYesBtn.textContent = phrases[Math.floor(Math.random() * phrases.length)];
         });
@@ -220,10 +248,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btn) {
             btn.addEventListener('mouseover', () => {
                 const phrases = [
-                    'Boa escolha! 😉',
-                    'Sabia decisão! 😎',
-                    'Essa é a resposta certa! 🥰',
-                    'Continue assim! 💝'
+                    'Boa escolha! (◕‿◕✿)',
+                    'Sabia decisão! (｡♥‿♥｡)',
+                    'Essa é a resposta certa! (＾▽＾)',
+                    'Continue assim! (´｡• ᵕ •｡`)'
                 ];
                 btn.textContent = phrases[Math.floor(Math.random() * phrases.length)];
             });
@@ -250,13 +278,13 @@ document.addEventListener('DOMContentLoaded', () => {
     [continueAnyway, imScared, noChoice].forEach(btn => {
         if (btn) {
             btn.addEventListener('mouseover', () => {
-                const phrases = [
-                    'Não tem volta! 😈',
-                    'Decisão final! 🤭',
-                    'Preparada? 💕',
-                    'Última chance... ou não! 😂'
+                const lastPhrases = [
+                    'Não tem volta! (｀･ω･´)ゞ',
+                    'Decisão final! (◕‿◕✿)',
+                    'Preparada? (｡♥‿♥｡)',
+                    'Última chance... ou não! ╮(︶▽︶)╭'
                 ];
-                btn.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+                btn.textContent = lastPhrases[Math.floor(Math.random() * lastPhrases.length)];
             });
 
             btn.addEventListener('mouseout', (e) => {
@@ -317,13 +345,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Efeito de hover mais óbvio
         notProgrammedBtn.addEventListener('mouseover', () => {
             notProgrammedBtn.style.transform = 'scale(1.1)';
-            const phrases = [
-                'Tem certeza? 🤨',
-                'Esse botão tá meio bugado... 🐛',
-                'O estagiário que fez esse! 😅',
-                'Clica por sua conta e risco! ⚠️'
+            const bugPhrases = [
+                'Tem certeza? (；一_一)',
+                'Esse botão tá meio bugado... (・_・;)',
+                'O estagiário que fez esse! (╯°□°）╯︵ ┻━┻',
+                'Clica por sua conta e risco! (⊙﹏⊙∥)'
             ];
-            notProgrammedBtn.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+            notProgrammedBtn.textContent = bugPhrases[Math.floor(Math.random() * bugPhrases.length)];
         });
 
         notProgrammedBtn.addEventListener('mouseout', () => {

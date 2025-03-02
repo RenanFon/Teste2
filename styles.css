@@ -461,3 +461,55 @@ body {
     opacity: 1;
     transition: opacity 0.3s ease;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8em;
+    font-family: 'Poppins', sans-serif;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 107, 139, 0.2);
+    text-shadow: 0 0 10px rgba(255, 107, 139, 0.3);
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.footer .emoji {
+    display: inline-block;
+    animation: sleeping 3s infinite;
+    margin: 0 5px;
+}
+
+.footer .coffee-cup {
+    display: inline-block;
+    animation: steam 2s infinite;
+    margin-left: 5px;
+    font-size: 1.2em;
+}
+
+@keyframes sleeping {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px) rotate(10deg); }
+}
+
+@keyframes steam {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
