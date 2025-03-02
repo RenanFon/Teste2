@@ -68,49 +68,13 @@ body::before {
     overflow-y: auto;
 }
 
-.heart {
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(45deg, #ff6b8b, #ff4181);
-    position: relative;
-    transform: rotate(45deg);
-    margin: 0 auto 20px;
-    animation: heartbeat 1.5s ease infinite;
-    box-shadow: 0 0 30px rgba(255, 107, 139, 0.5);
+/* Remover completamente os estilos antigos do coração */
+.heart, .heart:before, .heart:after {
+    display: none;
 }
 
-.heart:before, .heart:after {
-    content: '';
-    width: 30px;
-    height: 30px;
-    background: inherit;
-    border-radius: 50%;
-    position: absolute;
-    box-shadow: inherit;
-}
-
-.heart:before {
-    left: -15px;
-}
-
-.heart:after {
-    top: -15px;
-}
-
-.title {
-    color: #fff;
-    margin-bottom: 15px;
-    font-family: 'Consolas', monospace;
-    font-size: clamp(1.3em, 4vw, 2em);
-    text-shadow: 0 0 10px rgba(255, 107, 139, 0.5),
-                 0 0 20px rgba(255, 107, 139, 0.3);
-    animation: titleGlow 2s ease-in-out infinite;
-    opacity: 1;
-    transform: none;
-    animation: none;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    font-weight: 600;
-    letter-spacing: 0.5px;
+@keyframes heartbeat {
+    0% { } /* Mantem vazio mas válido */
 }
 
 .message {
@@ -353,12 +317,28 @@ body::before {
     50% { transform: translateY(-20px) rotate(1deg); }
 }
 
-@keyframes heartbeat {
-    0% { transform: rotate(45deg) scale(1); }
-    14% { transform: rotate(45deg) scale(1.3); }
-    28% { transform: rotate(45deg) scale(1); }
-    42% { transform: rotate(45deg) scale(1.3); }
-    70% { transform: rotate(45deg) scale(1); }
+/* Estilo do ícone de terminal */
+.terminal-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 20px;
+    border: 2px solid #ff4181;
+    border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(255, 65, 129, 0.1);
+}
+
+.terminal-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #ff4181;
+    margin: 3px 0;
+    box-shadow: 0 0 5px rgba(255, 65, 129, 0.5);
 }
 
 @keyframes titleGlow {
@@ -765,4 +745,84 @@ body::before {
     opacity: 1;
     transform: translateY(0);
     transition: all 0.3s ease;
+}
+
+.system-boot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Consolas', monospace;
+}
+
+.boot-content {
+    width: 80%;
+    max-width: 600px;
+}
+
+.boot-header {
+    color: #ff4181;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.boot-log {
+    color: #a8a8a8;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    height: 200px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 65, 129, 0.1);
+    border: 1px solid rgba(255, 65, 129, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff6b8b, #ff4181);
+    transition: width 0.3s ease;
+}
+
+.terminal-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 20px;
+    border: 2px solid #ff4181;
+    border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.terminal-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #ff4181;
+    margin: 5px 0;
+}
+
+/* Corrigir margens e espaçamentos */
+#mainQuestion {
+    padding-top: 20px;
+}
+
+#mainQuestion .title {
+    margin-top: 0;
 }

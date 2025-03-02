@@ -1,4 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Sistema de boot
+    const systemBoot = document.getElementById('systemBoot');
+    const bootLog = document.querySelector('.boot-log');
+    const progress = document.querySelector('.progress');
+    const container = document.querySelector('.container');
+    
+    container.style.display = 'none';
+    
+    const bootSequence = [
+        'Iniciando RF-CORE v1.0.3...',
+        'Verificando integridade do sistema...',
+        'Carregando módulos principais...',
+        'Inicializando kernel...',
+        'Verificando conexões...',
+        'Carregando interface...',
+        'Configurando protocolos...',
+        'Verificando dependências...',
+        'Preparando ambiente...',
+        'Sistema pronto.'
+    ];
+
+    let currentLog = 0;
+    let progressWidth = 0;
+
+    function updateBootLog() {
+        if (currentLog < bootSequence.length) {
+            const logEntry = document.createElement('div');
+            logEntry.textContent = '> ' + bootSequence[currentLog];
+            bootLog.appendChild(logEntry);
+            bootLog.scrollTop = bootLog.scrollHeight;
+            
+            progressWidth += 100 / bootSequence.length;
+            progress.style.width = progressWidth + '%';
+            
+            currentLog++;
+            setTimeout(updateBootLog, 800);
+        } else {
+            setTimeout(() => {
+                systemBoot.style.opacity = '0';
+                container.style.display = 'block';
+                setTimeout(() => {
+                    systemBoot.style.display = 'none';
+                }, 500);
+            }, 1000);
+        }
+    }
+
+    setTimeout(updateBootLog, 1000);
+
     // Manter apenas os elementos principais
     const verification = document.getElementById('verification');
     const nameChange = document.getElementById('nameChange');
