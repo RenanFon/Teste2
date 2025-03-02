@@ -54,9 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Verificação inicial
     if (verifyYesBtn) {
         verifyYesBtn.addEventListener('click', () => {
+            showSection(verification, nameChange);
             addFloatingEmojis();
-            verification.classList.add('hidden');
-            nameChange.classList.remove('hidden');
             animateDialogs(nameChange, [], 50, 800);
         });
     }
@@ -341,6 +340,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function showSection(hideElement, showElement) {
+    if (hideElement) {
+        hideElement.style.opacity = '0';
+        hideElement.style.transform = 'scale(0.9) translateY(20px)';
+        setTimeout(() => hideElement.classList.add('hidden'), 500);
+    }
+    
+    if (showElement) {
+        showElement.classList.remove('hidden');
+        requestAnimationFrame(() => {
+            showElement.style.opacity = '1';
+            showElement.style.transform = 'scale(1) translateY(0)';
+        });
+    }
+}
+
 // Melhorar efeito de confete
 function createConfetti() {
     const colors = ['#ff6b8b', '#4CAF50', '#FFD700', '#FF69B4', '#87CEEB', '#FFF'];
@@ -365,6 +380,8 @@ function createConfetti() {
     }
     
     confetti.style.boxShadow = '0 0 10px rgba(255,255,255,0.3)';
+    confetti.style.filter = 'blur(0.5px)';
+    confetti.style.boxShadow = `0 0 10px ${colors[Math.floor(Math.random() * colors.length)]}`;
     document.body.appendChild(confetti);
 
     const animation = confetti.animate([
@@ -392,6 +409,8 @@ function addFloatingEmojis() {
         emoji.style.left = Math.random() * window.innerWidth + 'px';
         emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
         emoji.style.opacity = Math.random() * 0.5 + 0.5;
+        emoji.style.filter = 'blur(0.5px)';
+        emoji.style.textShadow = '0 0 10px rgba(255,255,255,0.5)';
         document.body.appendChild(emoji);
         
         setTimeout(() => emoji.remove(), 5000);
@@ -423,6 +442,14 @@ function typeWriter(element, text, speed = 50) {
     let i = 0;
     const originalText = text.trim();
     element.textContent = '';
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(10px)';
+    
+    setTimeout(() => {
+        element.style.transition = 'all 0.3s ease';
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+    }, 100);
     
     function type() {
         if (i < originalText.length) {
