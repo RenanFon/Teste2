@@ -66,6 +66,14 @@ body::before {
     margin: 60px auto;
     max-height: 85vh;
     overflow-y: auto;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.container.show {
+    display: block;
+    opacity: 1;
 }
 
 /* Remover completamente os estilos antigos do coração */
@@ -719,17 +727,18 @@ body::before {
 }
 
 .process-log {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 90%;
     max-width: 400px;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.95);
     border: 1px solid rgba(255, 107, 139, 0.3);
     padding: 20px;
     border-radius: 8px;
+    backdrop-filter: blur(5px);
 }
 
 .process-log .log-entry {
@@ -754,16 +763,18 @@ body::before {
     width: 100%;
     height: 100%;
     background: #000;
-    z-index: 9999;
+    z-index: 99999;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Consolas', monospace;
+    transition: opacity 0.5s ease;
 }
 
 .boot-content {
-    width: 80%;
+    width: 90%;
     max-width: 600px;
+    padding: 20px;
 }
 
 .boot-header {

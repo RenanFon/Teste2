@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const progress = document.querySelector('.progress');
     const container = document.querySelector('.container');
     
+    // Garantir estado inicial correto
+    systemBoot.style.opacity = '1';
     container.style.display = 'none';
+    document.body.style.overflow = 'hidden';
     
     const bootSequence = [
         'Iniciando RF-CORE v1.0.3...',
@@ -38,9 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             setTimeout(() => {
                 systemBoot.style.opacity = '0';
-                container.style.display = 'block';
                 setTimeout(() => {
                     systemBoot.style.display = 'none';
+                    container.style.display = 'block';
+                    document.body.style.overflow = 'auto';
+                    setTimeout(() => {
+                        container.classList.add('show');
+                    }, 100);
                 }, 500);
             }, 1000);
         }
@@ -509,7 +516,7 @@ function animateDialogs(container, messages, speed = 50, delayBetween = 1000) {
 function showProcessLogs(section, logs, callback) {
     const logContainer = document.createElement('div');
     logContainer.className = 'console-log process-log';
-    section.appendChild(logContainer);
+    document.body.appendChild(logContainer);
 
     let currentLog = 0;
     function displayLog() {
@@ -526,10 +533,18 @@ function showProcessLogs(section, logs, callback) {
             }, 100);
         } else {
             setTimeout(() => {
-                logContainer.remove();
-                if (callback) callback();
+                logContainer.style.opacity = '0';
+                setTimeout(() => {
+                    logContainer.remove();
+                    if (callback) callback();
+                }, 500);
             }, 1000);
         }
     }
-    displayLog();
+    
+    // Adicionar fade in
+    setTimeout(() => {
+        logContainer.style.opacity = '1';
+        displayLog();
+    }, 100);
 }
