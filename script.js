@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             '<div class="log-entry">> Calculando melhor momento...</div>',
             '<div class="log-entry">> Enviando relatório para Renan...</div>',
             '<div class="log-entry success">> Processo finalizado com sucesso!</div>',
-            '<div class="log-entry">> Em breve: commit -m "Início do namoro" ❤</div>',
+            '<div class="log-entry">>Pegadinha hihihi mas agora já sei sua resposta...</div>',
             '</div>'
         ];
     
@@ -253,10 +253,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Adicionar efeito de hover divertido
         anotherYesBtn.addEventListener('mouseover', () => {
             const phrases = [
-                'Clica em mim! (◕‿◕✿)',
-                'Eu sei que você quer! (｡♥‿♥｡)',
-                'A outra opção é igual! (＾▽＾)',
-                'Escolha sabiamente... ou não! ╮(︶▽︶)╭'
+                'Clica em mim!',
+                'Eu sei que você quer!',
+                'A outra opção é igual!',
+                'Escolha sabiamente... ou não!'
             ];
             anotherYesBtn.textContent = phrases[Math.floor(Math.random() * phrases.length)];
         });
