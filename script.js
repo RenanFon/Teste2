@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (birthYesBtn) {
         birthYesBtn.addEventListener('click', () => {
             const currentDialog = birthdayCheck.querySelector('.message');
-            currentDialog.innerHTML = 'Há então é você mesmo quem estou procurando! (◍•ᴗ•◍)❤';
+            currentDialog.innerHTML = 'Há então é você mesmo quem estou procurando!';
             
             setTimeout(() => {
                 showSection(birthdayCheck, nameChange);
@@ -156,6 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             setTimeout(() => {
+                // Scroll suave para o topo em dispositivos móveis
+                if (window.innerWidth <= 480) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
                 celebration.classList.remove('hidden');
                 
                 // Nova implementação para animação do texto
@@ -165,17 +170,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Animar título
                 title.textContent = '';
-                typeWriter(title, '(｡♥‿♥｡) Era pegadinha! (＾▽＾)', 50);
+                typeWriter(title, 'Era pegadinha!', 50);
                 delay += 1500;
 
                 // Animar mensagem linha por linha
                 setTimeout(() => {
                     message.innerHTML = '';
                     const lines = [
-                        'O pedido de verdade vai ser pessoalmente! (◕‿◕✿)',
-                        'Mas já sei qual vai ser sua resposta (｡♥‿♥｡)',
-                        '<span class="highlight-name">Obrigado por testar a aplicação! (＾▽＾)</span>',
-                        '<span class="subtle-text">Te vejo em breve! (´｡• ᵕ •｡`)</span>'
+                        'O pedido de verdade vai ser pessoalmente!',
+                        'Mas já sei qual vai ser sua resposta',
+                        '<span class="highlight-name">Obrigado por testar a aplicação!</span>',
+                        '<span class="subtle-text">Te vejo em breve!</span>'
                     ];
 
                     let currentLine = 0;
@@ -211,6 +216,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     typeLine();
                 }, delay);
+
+                // Garantir que o usuário veja todo o conteúdo em mobile
+                if (window.innerWidth <= 480) {
+                    const scrollToBottom = () => {
+                        window.scrollTo({ 
+                            top: document.body.scrollHeight,
+                            behavior: 'smooth'
+                        });
+                    };
+                    setTimeout(scrollToBottom, 1500);
+                }
 
             }, 1000);
         }, 2000);
@@ -380,6 +396,11 @@ function showSection(hideElement, showElement) {
         requestAnimationFrame(() => {
             showElement.style.opacity = '1';
             showElement.style.transform = 'scale(1) translateY(0)';
+            
+            // Scroll suave para o topo em dispositivos móveis
+            if (window.innerWidth <= 480) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         });
     }
 }
