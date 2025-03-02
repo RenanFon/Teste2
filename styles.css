@@ -446,102 +446,74 @@ body::before {
 
 /* Ajustes para telas pequenas */
 @media (max-width: 480px) {
-    .heart {
-        width: 30px;
-        height: 30px;
-    }
-
-    .heart:before,
-    .heart:after {
-        width: 30px;
-        height: 30px;
-    }
-
-    .heart:before {
-        left: -15px;
-    }
-
-    .heart:after {
-        top: -15px;
-    }
-
-    .buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .btn {
-        width: 100%;
-        margin: 5px 0;
-    }
-
     body {
-        padding: 10px;
-        min-height: calc(100vh - 80px); /* Ajuste para o rodapé */
-        min-height: 100vh;
         padding: 0;
+        min-height: 100vh;
     }
 
     .container {
-        padding: clamp(0.8rem, 3vw, 2rem);
-        margin: 20px auto 80px; /* Espaço extra no final */
-        margin: 10px auto 60px;
+        padding: 1.2rem;
+        margin: 10px auto 80px;
         max-height: none;
         border-radius: 15px;
+        width: 95%;
     }
 
     .message {
-        font-size: clamp(0.9em, 3vw, 1.5em);
-        padding: 12px;
-        margin: 15px 0;
+        font-size: clamp(1.1em, 4vw, 1.6em);
+        padding: 15px;
+        margin: 20px 0;
+        line-height: 1.6;
     }
 
     .title {
-        font-size: clamp(1.5em, 4vw, 2.5em);
-        margin-bottom: 15px;
+        font-size: clamp(1.6em, 5vw, 2.2em);
+        margin-bottom: 20px;
+        line-height: 1.3;
     }
 
     .btn {
-        padding: 12px 20px;
-        font-size: 0.9em;
-        min-width: 200px;
-    }
-
-    .buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-
-    #celebration h2 {
-        font-size: 2em;
-        padding: 15px;
-    }
-
-    .footer {
-        padding: 8px;
-        font-size: 0.75em;
-        position: fixed;
-        bottom: 0;
+        padding: 15px 25px;
+        font-size: 1.1em;
+        min-width: 220px;
+        margin: 8px 0;
     }
 
     .highlight-name {
-        font-size: 1em;
+        font-size: 1.2em;
+        padding: 3px 8px;
     }
 
     .subtle-text {
-        font-size: 0.75em;
+        font-size: 0.9em;
     }
 
-    /* Ajuste para garantir que o conteúdo final seja visível */
-    #celebration {
-        margin-bottom: 60px;
-        margin-bottom: 80px;
+    /* Ajuste logs e console */
+    .boot-log, .process-log {
+        font-size: 1em;
     }
 
-    /* Melhorar visibilidade das mensagens */
-    .message p {
+    .log-entry {
+        font-size: 1em;
         margin: 8px 0;
+    }
+
+    /* Ajuste terminal icon */
+    .terminal-icon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 25px;
+    }
+
+    .terminal-line {
+        height: 3px;
+        margin: 6px 0;
+    }
+
+    /* Ajuste rodapé */
+    .footer {
+        padding: 12px;
+        font-size: 0.9em;
     }
 }
 
