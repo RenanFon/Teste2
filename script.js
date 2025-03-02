@@ -179,37 +179,56 @@ document.addEventListener('DOMContentLoaded', () => {
                     const lines = [
                         'O pedido de verdade vai ser pessoalmente!',
                         'Mas já sei qual vai ser sua resposta',
-                        '<span class="highlight-name">Obrigado por testar a aplicação!</span>',
-                        '<span class="subtle-text">Te vejo em breve!</span>'
+                        '<div class="console-log">',
+                        '<div class="log-entry">> Iniciando processo...</div>',
+                        '<div class="log-entry">> Salvando dados...</div>',
+                        '<div class="log-entry">> Enviando para Renan Fonseca...</div>',
+                        '<div class="log-entry">> Confirmando...</div>',
+                        '<div class="log-entry success">> Sucesso!</div>',
+                        '<div class="log-entry">> Até breve! ❤</div>',
+                        '</div>'
                     ];
 
                     let currentLine = 0;
                     function typeLine() {
                         if (currentLine < lines.length) {
-                            const p = document.createElement('p');
+                            const p = document.createElement('div');
                             message.appendChild(p);
                             
-                            if (lines[currentLine].includes('<span')) {
-                                p.innerHTML = lines[currentLine];
-                                const span = p.querySelector('span');
-                                span.textContent = '';
-                                typeWriter(span, span.getAttribute('data-text') || span.textContent, 50);
+                            if (lines[currentLine].includes('class="log-entry"')) {
+                                p.outerHTML = lines[currentLine];
+                                const lastLog = message.querySelector('.log-entry:last-child');
+                                setTimeout(() => lastLog.classList.add('show'), 100);
+                                currentLine++;
+                                setTimeout(typeLine, 1000); // Delay maior para os logs
                             } else {
-                                typeWriter(p, lines[currentLine], 50);
+                                if (lines[currentLine].includes('<div class="console-log">')) {
+                                    p.outerHTML = lines[currentLine];
+                                } else {
+                                    if (lines[currentLine].includes('<span')) {
+                                        p.innerHTML = lines[currentLine];
+                                        const span = p.querySelector('span');
+                                        span.textContent = '';
+                                        typeWriter(span, span.getAttribute('data-text') || span.textContent, 50);
+                                    } else {
+                                        typeWriter(p, lines[currentLine], 50);
+                                    }
+                                }
+                                currentLine++;
+                                setTimeout(typeLine, 1500);
                             }
                             
-                            currentLine++;
-                            setTimeout(typeLine, 1500);
-                        } else {
-                            // Adicionar emojis após completar o texto
-                            const funKaomojis = ['(◕‿◕✿)', '(｡♥‿♥｡)', '(＾▽＾)', '(´｡• ᵕ •｡`)', '(◍•ᴗ•◍)'];
-                            for (let i = 0; i < 10; i++) {
-                                const emoji = document.createElement('div');
-                                emoji.className = 'floating-emoji';
-                                emoji.textContent = funKaomojis[Math.floor(Math.random() * funKaomojis.length)];
-                                emoji.style.left = Math.random() * window.innerWidth + 'px';
-                                document.body.appendChild(emoji);
-                                setTimeout(() => emoji.remove(), 5000);
+                            // Garantir que o scroll acompanhe o conteúdo
+                            const scrollToBottom = () => {
+                                const containerHeight = document.querySelector('.container').scrollHeight;
+                                window.scrollTo({
+                                    top: containerHeight,
+                                    behavior: 'smooth'
+                                });
+                            };
+                            
+                            if (currentLine > 2) { // Começar a rolar após os primeiros textos
+                                setTimeout(scrollToBottom, 200);
                             }
                         }
                     }
@@ -384,6 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Ajustar função showSection para melhor comportamento mobile
 function showSection(hideElement, showElement) {
     if (hideElement) {
         hideElement.style.opacity = '0';
@@ -393,14 +413,15 @@ function showSection(hideElement, showElement) {
     
     if (showElement) {
         showElement.classList.remove('hidden');
+        showElement.style.opacity = '0';
+        
         requestAnimationFrame(() => {
             showElement.style.opacity = '1';
             showElement.style.transform = 'scale(1) translateY(0)';
             
-            // Scroll suave para o topo em dispositivos móveis
-            if (window.innerWidth <= 480) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+            // Reset do scroll
+            window.scrollTo(0, 0);
+            document.querySelector('.container').scrollTop = 0;
         });
     }
 }
